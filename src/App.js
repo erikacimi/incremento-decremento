@@ -1,23 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
 
 function App() {
+  const [inputValue, setInputValue] = useState(0);
+  const [totalValue, setTotalValue] = useState(0);
+
+  const handleIncrement = () => {
+    setTotalValue(totalValue + inputValue);
+  };
+
+  const handleDecrement = () => {
+    if (totalValue > 0) {
+      setTotalValue(totalValue - inputValue);
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <input
+        type="number"
+        value={inputValue}
+        onChange={(e) => setInputValue(Number(e.target.value))}
+      />
+      <button onClick={handleIncrement}>Incrementa</button>
+      <button onClick={handleDecrement} disabled={totalValue === 0}>
+        Decrementa
+      </button>
+      <p>Valore totale: {totalValue}</p>
     </div>
   );
 }
